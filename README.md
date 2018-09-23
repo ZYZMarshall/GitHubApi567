@@ -1,6 +1,1 @@
-python:
- - "3.5"
-
-# command to run tests
-script:
- - python -m unittest testHW04567
+[![build status of master](https://travis-ci.org/ZYZMarshall/GitHubApi567.svg?branch=master)](https://travis-ci.org/ZYZMarshall/GitHubApi567)
