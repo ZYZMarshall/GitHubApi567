@@ -1,2 +1,6 @@
-# GitHubApi567
-New repository for SSW567
+python:
+ - "3.5"
+
+# command to run tests
+script:
+ - python -m unittest testHW04567
