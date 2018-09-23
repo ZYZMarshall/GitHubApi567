@@ -19,7 +19,7 @@ class TestHW04567(unittest.TestCase):
         self.assertNotIn("HelloUnivrse", getUserRepos("ZYZMarshall"))
 
     def testHW0456702c(self):
-        self.assertNotEqual(5, getCommitnum("ZYZMarshall", "Hello-world-"))
+        self.assertNotEqual(3, getCommitnum("ZYZMarshall", "Hello-world-"))
 
     def testHW0456703A(self):
         self.assertEqual([], getUserRepos("Notexisit12343213"))
