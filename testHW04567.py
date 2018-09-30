@@ -1,6 +1,6 @@
 import unittest
 
-from GitHubApi import getCommits, getRepos
+from HW04567 import getCommitnum, getUserRepos
 
 class TestGitHubApi(unittest.TestCase):
 
