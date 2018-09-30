@@ -1,12 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tuesday 9/25 2018
+author: yuzhen zhang
+"""
+
 import unittest
 
-from HW04567 import get_commits_numbers
+from HW04567 import get_info
 
 
-class TestHW04(unittest.TestCase):
-    def test_user_repositories(self):
-        self.assertDictEqual(get_commits_numbers("ZYZMarshall"),
-                             {{'GitHubApi567': 23,'GitHubApi567-1': 5,'GitHubApi567-2': 4,'Hello-world-': 5, 'SSW567-HW05': 5,'Triangle567': 24,'hello-world': 2, 'triangle': 5}})
+class TestGetInfo(unittest.TestCase):
+    
+    def testValidUser(self):
+        self.assertEqual(get_info('ZYZMarshall'), [('hello-world', 2), ('GitHubApi567', 25), ('Triangle567', 24)])
+        
+    def testInvalidUser(self):
+        self.assertEqual(get_info('jsbfjejknejk'), 'Invalid GitHub Username')
+        self.assertEqual(get_info(' '), 'Invalid GitHub Username')
+
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2, exit=False)
+    unittest.main()
