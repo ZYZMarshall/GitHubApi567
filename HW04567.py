@@ -1,36 +1,40 @@
+"""
+HW04-API
+"""
 import requests
 import json
 
-def getUserID():
-    userID = input('Enter a GitHub User ID: ')
-    return userID
 
-def getCommits(userID, repos):
-    commits = []
-    for i in repos:
-        r = requests.get('https://api.github.com/repos/' + userID + '/' + i + '/commits')
-        r = r.json()
-        commits.append(len(r))
-    return commits
+def get_user_repositories(user_id):
+    url = 'https://api.github.com/users/' + user_id + '/repos'
+    response = json.loads(requests.get(url).text)
+    rt = []
+    for i in response:
+        rt.append(i.get('name'))
+    return rt
 
 
-def getRepos(userID):
-    r = requests.get('https://api.github.com/users/' + userID + '/repos')
-    r = r.json()
-    repos = []
-    for i in r:
-        #print(i['name'])
-        repos.append(i['name'])
-    return repos
+def get_commits(user_id, repository):
+    url = 'https://api.github.com/repos/' + user_id + '/' + repository + '/commits'
+    response = json.loads(requests.get(url).text)
+    return len(response)
+
+
+def get_commits_numbers(user_id):
+    repositories = get_user_repositories(user_id)
+    commits_number = {}
+    for repository in repositories:
+        commits_number[repository] = get_commits(user_id, repository)
+    return commits_number
+
+
+def print_info(user_id):
+    dic = get_commits_numbers(user_id)
+    print('User: ' + user_id)
+    for repository in dic:
+        print('Repo: ' + repository + " Number of commits: " + str(dic[repository]))
 
 
 if __name__ == '__main__':
-    userID = getUserID()
-    repos = getRepos(userID)
-    commits = getCommits(userID, repos)
-
-    print('User: ' + userID)
-    j = 0
-    for i in repos:
-        print('Repo: ' + i + ' Number of Commits: ' + str(commits[j]))
-        j += 1
+    user_id = "pchen12567"
+    print_info(user_id)
