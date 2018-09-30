@@ -1,14 +1,9 @@
 import unittest
 
-from HW04567 import  getCommits, getRepos
+from HW04567 import get_commits_numbers
 
-class TestGitHubApi(unittest.TestCase):
 
-    def testGetCommits(self):
-        self.assertEqual(getCommits('ZYZMarshall', ['Triangle567']), [24], 'There are 24 commits in this repo')
-
-    def testGetRepos(self):
-        self.assertEqual(getRepos('ZYZMarshall'), ['GitHubApi567', 'hello-world','Hello-world-', 'triangle','Triangle567','SS2567-HW05'])
-
-if __name__ == '__main__':
-    unittest.main()
+class TestHW04(unittest.TestCase):
+    def test_user_repositories(self):
+        self.assertDictEqual(get_commits_numbers("ZYZMarshall"),
+                             {'GitHubAPI567': 18, 'Triangle567': 24, 'Hello-world-': 5})
