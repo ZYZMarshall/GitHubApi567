@@ -1,29 +1,36 @@
+
+import json
 import unittest
-from HW04567 import getUserRepos, getCommitnum
+# import unittest.mock
+# from unittest.mock import patch
+from unittest import mock
+from unittest.mock import Mock
 
-class TestHW04567(unittest.TestCase):
-    
-    def testHW0456701(self):
-        self.assertIn("hello-world", getUserRepos("ZYZMarshall"))
-                    
-    def testHW0456701b(self):
-        self.assertNotIn("ddddddd", getUserRepos("ZYZMarshall"))
+class DummyObject(object):
+    def __init__(self, content):
+        self.content = content
 
-    def testHW0456701c(self):
-        self.assertEqual(24, getCommitnum("ZYZMarshall", "Triangle567"))
-                         
-    def testHW0456702A(self):
-        self.assertIn("Triangle567", getUserRepos("ZYZMarshall"))
-                    
-    def testHW0456702b(self):
-        self.assertNotIn("HelloUnivrse", getUserRepos("ZYZMarshall"))
+class TestHw04a(unittest.TestCase):
+        
+    @mock.patch('requests.get')
+    def testValidInput1(self, mocked_reqs):
+        """ this mocks GitHub returning JSON with two repositories.  The second and third are the JSON details about the number of commits """
+        mocked_reqs.side_effect = [
+            # Each nested dictionary below is like an individual repo - 
+            # the first response emulates the github request to get all repos
+            # the subsequent responses emulate the details associated with each of the repos in mockedResponses[0]
+            DummyObject(b'[{"id" : "146485002", "name" : "hello-world"}, {"id" : "147696620", "name" : "Triangle567"}]'),
+            DummyObject(b'[{"commit": "You want a commit?"}, {"commit": "Leave me alone."}, {"commit": "Alright,what you want?"}]'),
+            DummyObject(b'[{"comit": "No, not again."}, {"commit": "You wanna fight?"}]')]
 
-    def testHW0456702c(self):
-        self.assertNotEqual(3, getCommitnum("ZYZMarshall", "Hello-world-"))
 
-    def testHW0456703A(self):
-        self.assertEqual([], getUserRepos("Notexisit12343213"))
+        self.assertEqual(getCommitnum("", "hello-world"), 3)  #YOUR TEST HERE
+        self.assertEqual(getCommitnum("", "Triangle567"), 2)  #YOUR TEST HERE
+        
+       
 
+
+        
 if __name__ == '__main__':
     print('Running unit tests')
-    unittest.main()
+    unittest.main(exit=False)
