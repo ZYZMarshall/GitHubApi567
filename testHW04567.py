@@ -5,6 +5,7 @@ import unittest
 # from unittest.mock import patch
 from unittest import mock
 from unittest.mock import Mock
+from HW04567 import getCommitnum, getUserRepos
 
 class DummyObject(object):
     def __init__(self, content):
