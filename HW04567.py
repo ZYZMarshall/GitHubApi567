@@ -9,7 +9,7 @@ along with the number of commits that are in each of the listed repositories.
 def getUserRepos(userName):       
     API = ("https://api.github.com/users/" + userName + "/repos")
     userData = requests.get(API)
-    repositories = json.loads(userData.text)
+    repositories = json.loads(userData)
     userRepos = []
     
     for repository in repositories:
@@ -23,7 +23,7 @@ def getUserRepos(userName):
 def getCommitnum(userName, repoName):          #  number of commits that are in each of the listed repositories.
     API = "https://api.github.com/repos/" + userName + "/" + repoName + "/commits"
     repoData = requests.get(API)
-    commits = json.loads(repoData.text)
+    commits = json.loads(repoData)
     Commitnum = len(commits)
 
     return Commitnum
