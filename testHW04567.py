@@ -20,9 +20,9 @@ class TestHw04a(unittest.TestCase):
             # Each nested dictionary below is like an individual repo - 
             # the first response emulates the github request to get all repos
             # the subsequent responses emulate the details associated with each of the repos in mockedResponses[0]
-            (b'[{"id" : "146485002", "name" : "hello-world"}, {"id" : "147696620", "name" : "Triangle567"}]'),
-            (b'[{"commit": "You want a commit?"}, {"commit": "Leave me alone."}, {"commit": "Alright,what you want?"}]'),
-            (b'[{"comit": "No, not again."}, {"commit": "You wanna fight?"}]')]
+            DummyObject(b'[{"id" : "146485002", "name" : "hello-world"}, {"id" : "147696620", "name" : "Triangle567"}]'),
+            DummyObject(b'[{"commit": "You want a commit?"}, {"commit": "Leave me alone."}, {"commit": "Alright,what you want?"}]'),
+            DummyObject(b'[{"comit": "No, not again."}, {"commit": "You wanna fight?"}]')]
 
 
         self.assertEqual(getCommitnum("", "hello-world"), 2)  #YOUR TEST HERE
